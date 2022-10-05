@@ -46,7 +46,7 @@ class BuyForm
   def initialize(user, product, ammount)
     self.user = user
     self.product = product
-    self.ammount = ammount
+    self.ammount = ammount || 0
   end
 
   def save

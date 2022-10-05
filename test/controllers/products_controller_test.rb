@@ -6,7 +6,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def set_session
-    # @user = users(:two)
     post sessions_url, params: { session: { password: 'some_password', username: @user.username } }
   end
 
@@ -72,6 +71,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     post "/products/#{@user.id}/buy", params: { ammount: }, as: :json
     assert_response :success
     assert response.parsed_body.keys, ["product", "ammount_spent", "change"]
-  
+    assert response.parsed_body['ammount_spent'], 10
+    assert response.parsed_body['change'], [5]  
   end
 end
