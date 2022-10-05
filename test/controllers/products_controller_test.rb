@@ -5,6 +5,11 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @product = products(:one)
   end
 
+  def set_session
+    #@user = users(:two)
+    post sessions_url, params: { session: { password: 'some_password', username: 'some_user' } }
+  end
+  
   test "should get index" do
     get products_url, as: :json
     assert_response :success
@@ -24,15 +29,28 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: { amount_available: @product.amount_available, cost: @product.cost, product_name: @product.product_name, seller_id: @product.seller_id } }, as: :json
+    @user = users(:two)
+    set_session
+    patch product_url(@product), params: { product: { cost: @product.cost, product_name: @product.product_name } }, as: :json
     assert_response :success
   end
 
   test "should destroy product" do
+    @user = users(:two)
+    set_session
     assert_difference("Product.count", -1) do
       delete product_url(@product), as: :json
     end
 
     assert_response :no_content
+  end
+
+  test "should not destroy product of another seller" do
+    @user = users(:two)
+    another_user = users(:three)
+    @product.update_column :seller_id, another_user.id
+    set_session
+    delete product_url(@product), as: :json
+    assert_response :forbidden
   end
 end

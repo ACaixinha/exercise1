@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = policy_scope Product
 
     render json: @products
   end
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = Product.new(product_params)
+    @product = authorize(Product.new(new_product_params))
 
     if @product.save
       render json: @product, status: :created, location: @product
@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1
   def update
+    authorize @product
     if @product.update(product_params)
       render json: @product
     else
@@ -35,6 +36,7 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   def destroy
+    authorize @product
     @product.destroy
   end
 
@@ -46,6 +48,9 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
+      params.require(:product).permit(:cost, :product_name)
+    end
+    def new_product_params
       params.require(:product).permit(:amount_available, :cost, :product_name, :seller_id)
     end
 end
