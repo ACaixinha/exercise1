@@ -98,4 +98,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :forbidden
     assert @user.deposit, current_deposit
   end
+
+  test 'reset deposit' do
+    set_session users(:one)
+
+    patch "/users/#{@user.id}/reset", as: :json
+    assert_response :success
+    assert @user.deposit, 0
+  end
 end

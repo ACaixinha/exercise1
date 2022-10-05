@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   post '/users/:id/deposit', to: 'users#deposit'
+  patch '/users/:id/reset', to: 'users#reset'
   post '/products/:id/buy', to: 'products#buy'
-  
+
   resources :users
   resources :products
 

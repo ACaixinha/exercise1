@@ -28,6 +28,10 @@ class UserPolicy < ApplicationPolicy
   def deposit?
     its_me? && user.role == User::BUYER_ROLE
   end
+
+  def reset?
+    user.role == User::BUYER_ROLE
+  end
 private
   def its_me?
     user.id = record.id

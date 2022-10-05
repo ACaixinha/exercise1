@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy deposit]
+  before_action :set_user, only: %i[show update destroy deposit reset]
 
   # GET /users
   def index
@@ -49,6 +49,17 @@ class UsersController < ApplicationController
       render json: form.user, status: :ok
     else
       render json: form.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH /users/:id/reset
+  def reset
+    authorize @user
+
+    if @user.update(deposit: 0)
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
