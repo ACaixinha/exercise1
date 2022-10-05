@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :username, limit: 30
       t.string :encrypted_password
       t.string :role
+      t.integer :deposit, default: 0
 
       t.timestamps
     end

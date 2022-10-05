@@ -20,7 +20,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show product" do
     get product_url(@product), as: :json
-    debugger
     assert_response :success
   end
 

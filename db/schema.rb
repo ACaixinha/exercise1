@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_083801) do
     t.string "username", limit: 30
     t.string "encrypted_password"
     t.string "role"
+    t.integer "deposit", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true

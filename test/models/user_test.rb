@@ -23,4 +23,10 @@ class UserTest < ActiveSupport::TestCase
     refute user.valid?
     assert_not_nil user.errors[:password]
   end
+
+  test 'validate role presence' do
+    user = User.new
+    refute user.valid?
+    assert_not_nil user.errors[:role]
+  end
 end

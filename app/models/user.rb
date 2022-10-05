@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validates :password, presence: true
+  validates :role, presence: true
 
   def password
     @password ||= encrypted_password.present? ? Password.new(encrypted_password) : nil
