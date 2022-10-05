@@ -19,7 +19,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_url, as: :json
     assert_response :success
     data = response.parsed_body
-    assert data.first.keys == %w[username role id]
+    assert data.first.keys.sort == %w[id username role].sort
   end
 
   test 'should get index and return only sellers and current user' do

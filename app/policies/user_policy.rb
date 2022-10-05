@@ -10,14 +10,22 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.id = record.id
+    its_me?
   end
 
-  def create
+  def create?
     true
   end
 
-  def show
+  def show?
+    its_me?
+  end
+
+  def destroy?
+    its_me?
+  end
+private
+  def its_me?
     user.id = record.id
   end
 end
