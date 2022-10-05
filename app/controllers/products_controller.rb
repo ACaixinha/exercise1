@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show update destroy ]
+  before_action :set_product, only: %i[ show update destroy buy]
 
   # GET /products
   def index
@@ -39,6 +39,19 @@ class ProductsController < ApplicationController
     authorize @product
     @product.destroy
   end
+
+
+  # POST /products/1/buy
+  def buy
+    authorize @product
+    form = BuyForm.new(current_user, @product, params[:ammount])
+    if form.save
+      render json: form.product, status: :ok
+    else
+      render json: form.errors, status: :unprocessable_entity
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

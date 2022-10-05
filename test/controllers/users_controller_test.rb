@@ -82,7 +82,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     invalid_deposits = [1, 2, 8, 16, 42]
     invalid_deposits.each do |deposit|
-      post "/users/#{@user.id}/deposit", params: { deposit: }, as: :json
+      post "/users/#{@user.id}/deposit", params: { deposit: deposit}, as: :json
       assert_response :unprocessable_entity
       assert response.parsed_body['deposit'] == ['is not included in the list']
       @user.reload

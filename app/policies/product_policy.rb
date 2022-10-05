@@ -25,6 +25,10 @@ class ProductPolicy < ApplicationPolicy
     true
   end
 
+  def buy?
+    user.role == User::BUYER_ROLE
+  end
+
   private
 
   def mine?

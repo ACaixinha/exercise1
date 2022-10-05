@@ -4,6 +4,7 @@ one:
   username: buyer_user
   encrypted_password: "$2a$12$iV44ri6fKTnzufaMTNqDxuziaWSPWojZED99yKvvxt.3QIX6oWdEe"
   role: 'buyer'
+  deposit: 15
 
 two:
   username: some_user
