@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    @session_form = Session.new(session_params)
+    @session_form = SessionForm.new(session_params)
     if @session_form.valid?
       user = User.find_by(username: @session_form.username)
       if user.blank?
