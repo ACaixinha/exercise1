@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: buyer_user
+  encrypted_password: "$2a$12$hF3daICmQ15moGTQWn8gs.F4CJ4jzPMt5luWMj8OwH6r.3Q23Ulj2"
+  role: 'buyer'
+
+two:
+  username: some_user
+  encrypted_password: "$2a$12$iV44ri6fKTnzufaMTNqDxuziaWSPWojZED99yKvvxt.3QIX6oWdEe"
+  role: 'seller'
