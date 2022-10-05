@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = policy_scope(User)
 
-    render json: @users
+    render json: @users.to_json(only: [:username, :role, :id])
   end
 
   # GET /users/1

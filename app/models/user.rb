@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates :password, presence: true
   validates :role, presence: true
 
+  has_many :products, dependent: :destroy, foreign_key: :seller_id
+
   def password
     @password ||= encrypted_password.present? ? Password.new(encrypted_password) : nil
   end

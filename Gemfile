@@ -48,3 +48,5 @@ end
 
 gem "bcrypt", "~> 3.1"
 gem "rubocop", "~> 1.36"
+
+gem "pundit", "~> 2.2"
