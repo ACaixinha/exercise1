@@ -56,4 +56,17 @@ class BuyFormTest < ActiveSupport::TestCase
     refute form.save
     assert form.errors[:ammount].include?('Buyer is unable to pay')
   end
+
+  test '#change' do
+    user = users('one')
+    user.update(deposit: 125)
+    product = products('one')
+    ammount = 2
+    form = BuyForm.new(user, product, ammount)
+    old_deposit = user.deposit
+    old_amount_available = product.amount_available
+    assert form.save
+
+    assert form.change, [100, 10, 5]
+  end
 end

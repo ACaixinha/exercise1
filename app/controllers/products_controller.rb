@@ -46,7 +46,11 @@ class ProductsController < ApplicationController
     authorize @product
     form = BuyForm.new(current_user, @product, params[:ammount])
     if form.save
-      render json: form.product, status: :ok
+      render json: {
+        product: form.product,
+        ammount_spent: form.ammount_spent,
+        change: form.change
+      }, status: :ok
     else
       render json: form.errors, status: :unprocessable_entity
     end

@@ -71,5 +71,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     post "/products/#{@user.id}/buy", params: { ammount: }, as: :json
     assert_response :success
+    assert response.parsed_body.keys, ["product", "ammount_spent", "change"]
+  
   end
 end
