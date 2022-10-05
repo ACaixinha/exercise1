@@ -3,6 +3,9 @@ require 'bcrypt'
 class User < ApplicationRecord
   include BCrypt
 
+  BUYER_ROLE='buyer' 
+  SELLER_ROLE='seller' 
+
   validates :username, presence: true
   validates :password, presence: true
 
